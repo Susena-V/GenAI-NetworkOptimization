@@ -42,8 +42,16 @@ st.markdown(
             font-weight: bold;
         }
         .assistant-message {
-            color: #2196f3;
-            font-style: italic;
+            color: #ffffff;
+        }
+        
+         .user-icon {
+            left: -25px;  /* Position the user icon outside the left side of the message bubble */
+            color: #76d7c4;
+        }
+        .assistant-icon {
+            right: -25px;  /* Position the assistant icon outside the right side of the message bubble */
+            color: #ffffff;
         }
     </style>
     """,
@@ -87,12 +95,16 @@ if st.button("Send"):
 for msg in st.session_state.messages:
     if msg["role"] == "user":
         st.markdown(
-            f'<div class="chat-container"><p class="user-message">You: {msg["content"]}</p></div>',
+            f'<div class="chat-container"><p class="user-message">You: {msg["content"]}</p></div>'
+            f'<div class="message-icon assistant-icon">😸</div>',
+
             unsafe_allow_html=True,
         )
     else:
         st.markdown(
-            f'<div class="chat-container"><p class="assistant-message">Assistant: {msg["content"]}</p></div>',
+            f'<div class="chat-container"><p class="assistant-message">Assistant: {msg["content"]}</p></div>'
+            f'<div class="message-icon assistant-icon">🦄</div>',
+
             unsafe_allow_html=True,
         )
 
