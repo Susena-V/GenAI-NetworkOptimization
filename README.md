@@ -1,4 +1,3 @@
-
 # Network Engineer Assistant Chatbot 🚀  
 
 The **Network Engineer Assistant Chatbot** is an AI-powered tool 🤖 designed to assist network engineers by simplifying their tasks and providing instant, intelligent solutions. This project won 🏆 **first place** at a **GenAI Hackathon**, demonstrating its innovation and practical application in the networking domain.  
@@ -8,6 +7,10 @@ The **Network Engineer Assistant Chatbot** is an AI-powered tool 🤖 designed t
 ## Features 🌟  
 - **Intelligent Assistance**: Offers quick solutions to common network engineering challenges.  
 - **Task Automation**: Automates repetitive tasks, saving time ⏱️ and reducing errors ❌.  
+- **Anomaly Detection & Bottleneck Prediction**: Detects resource bottlenecks, identifies anomalies, and predicts potential issues.  
+- **Dynamic Task Rescheduling**: Automatically reschedules tasks to optimize network performance.  
+- **Comprehensive Network Documentation**: Provides detailed network documentation for engineers to easily access critical information.  
+- **Efficiency & Accuracy**: Increases efficiency and accuracy by quickly and accurately detecting network issues.  
 - **User-Friendly Interface**: Built with **Streamlit** for an intuitive and seamless user experience.  
 
 ---
@@ -69,4 +72,3 @@ This project is licensed under the [MIT License](LICENSE).
 This project was developed as part of a **GenAI Hackathon**, where it won 🥇 **first place** for its innovative approach and practical application in the networking domain.  
 
 ---
-
