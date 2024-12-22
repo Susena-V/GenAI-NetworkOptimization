@@ -5,119 +5,32 @@ from chat_logic import initialize_chat_state, handle_user_input, generate_pdf, c
 st.markdown(
     """
     <style>
-        /* Input field styling */
-        .stTextInput input {
-            border: 2px solid #6a1b9a;
-            border-radius: 6px;
-            padding: 8px 12px;
-            transition: all 0.3s ease;
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 15px rgba(106, 27, 154, 0.7),
+                            0 0 30px rgba(106, 27, 154, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(106, 27, 154, 0.9),
+                            0 0 40px rgba(106, 27, 154, 0.7),
+                            0 0 60px rgba(106, 27, 154, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 15px rgba(106, 27, 154, 0.7),
+                            0 0 30px rgba(106, 27, 154, 0.5);
+            }
         }
-        
-        .stTextInput input:hover {
-            border-color: #9c27b0;
-        }
-        
-        .stTextInput input:focus {
-            border-color: #6a1b9a;
-            box-shadow: 0 0 8px rgba(106, 27, 154, 0.4);
-            outline: none;
-        }
-        
-        /* Button styling */
-        .stButton button {
-            background-color: transparent;
-            border: 2px solid #6a1b9a;
-            border-radius: 6px;
-            color: #6a1b9a;
-            transition: all 0.3s ease;
-        }
-        
-        .stButton button:hover {
-            background-color: rgba(106, 27, 154, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        .stButton button:active {
-            transform: translateY(0);
-            background-color: rgba(106, 27, 154, 0.2);
-        }
-        
-        .stButton button:focus {
-            box-shadow: 0 0 0 2px rgba(106, 27, 154, 0.3);
-            outline: none;
-        }
-        
-        
-        /* Clear button specific */
-        .clear-button button:hover {
-            background-color: rgba(106, 27, 154, 0.1) !important;
-            border-radius: 4px;
-        }
+
         .purple-glow {
             font-size: 3rem;
             text-align: center;
             color: #6a1b9a;
-            text-shadow: 0 0 15px rgba(106, 27, 154, 0.7), 0 0 30px rgba(106, 27, 154, 0.5);
-            margin-bottom: 2rem;
-            
-        }
-        .chat-container {
-            background-color: #000000;
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        .user-message {
-            font-weight: bold;
-        }
-        .assistant-message {
-            color: #ffffff;
-        }
-        .fixed-input-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: white;
-            padding: 1rem;
-            border-top: 1px solid #ddd;
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            z-index: 100;
-        }
-        .main-content {
-            margin-bottom: 100px;
-        }
-        .send-button {
-            border: none;
-            background: none;
-            color: #6a1b9a;
-            font-size: 24px;
-            padding: 0 10px;
-            cursor: pointer;
-        }
-        .stButton button {
-            background: none;
-            border: none;
-            color: #6a1b9a;
-        }
-        .clear-button {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 101;
-        }
-        @media (max-width: 768px) {
-            .fixed-input-container {
-                padding: 0.5rem;
-            }
-            .purple-glow {
-                font-size: 3rem;
-            }
+            animation: glow 2s ease-in-out infinite;
+            margin-bottom: 0rem;
         }
         
-          .chat-container {
+        /* Chat container styling */
+        .chat-container {
             border-radius: 10px;
             padding: 10px 40px;
             margin-bottom: 10px;
@@ -126,13 +39,28 @@ st.markdown(
         
         .bgcolor-assist {
             background-color: #000000;
-
-        }
-        .bgcolor-use {
-            background-color: #aa00ff;
-
         }
         
+        .bgcolor-use {
+            background-color: #aa00ff;
+        }
+        
+        /* Message styling */
+        .message-content {
+            width: 100%;
+        }
+        
+        .user-message {
+            font-weight: bold;
+            padding-left: 30px;
+        }
+        
+        .assistant-message {
+            color: #ffffff;
+            padding-right: 30px;
+        }
+        
+        /* Emoji styling */
         .emoji {
             position: absolute;
             font-size: 1.5rem;
@@ -148,43 +76,34 @@ st.markdown(
             left: -35px;
         }
         
-        .message-content {
-            width: 100%;
+        /* Input container styling */
+        .fixed-input-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            padding: 1rem;
+            border-top: 1px solid #ddd;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            z-index: 100;
         }
         
-        
-        .user-message {
-            font-weight: bold;
-            padding-left: 30px;
+        .main-content {
+            margin-bottom: 100px;
         }
         
-        
-        .assistant-message {
-            color: #ffffff;
-            padding-right: 30px;
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .fixed-input-container {
+                padding: 0.5rem;
+            }
+            .purple-glow {
+                font-size: 2rem;
+            }
         }
-        
-        .action-buttons {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 101;
-    display: flex;
-    gap: 10px;
-}
-
-.download-button button {
-    background-color: #6a1b9a !important;
-    color: white !important;
-}
-
-.loading-spinner {
-    text-align: center;
-    color: #6a1b9a;
-    margin: 20px 0;
-}
-        
-     
     </style>
     """,
     unsafe_allow_html=True,
