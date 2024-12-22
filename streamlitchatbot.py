@@ -54,11 +54,12 @@ st.markdown(
             border-radius: 4px;
         }
         .purple-glow {
-            font-size: 2rem;
+            font-size: 3rem;
             text-align: center;
             color: #6a1b9a;
             text-shadow: 0 0 15px rgba(106, 27, 154, 0.7), 0 0 30px rgba(106, 27, 154, 0.5);
             margin-bottom: 2rem;
+            
         }
         .chat-container {
             background-color: #000000;
@@ -112,16 +113,24 @@ st.markdown(
                 padding: 0.5rem;
             }
             .purple-glow {
-                font-size: 1.5rem;
+                font-size: 3rem;
             }
         }
         
           .chat-container {
-            background-color: #000000;
             border-radius: 10px;
             padding: 10px 40px;
             margin-bottom: 10px;
             position: relative;
+        }
+        
+        .bgcolor-assist {
+            background-color: #000000;
+
+        }
+        .bgcolor-use {
+            background-color: #aa00ff;
+
         }
         
         .emoji {
@@ -132,11 +141,11 @@ st.markdown(
         }
         
         .user-emoji {
-            right: -30px;
+            right: -35px;
         }
         
         .bot-emoji {
-            left: -30px;
+            left: -35px;
         }
         
         .message-content {
@@ -197,17 +206,17 @@ with st.container():
     for msg in st.session_state.messages:
         if msg["role"] == "user":
             st.markdown(
-                f'''<div class="chat-container">
+                f'''<div class="chat-container bgcolor-use">
                     <div class="emoji user-emoji">😸</div>
-                    <div class="message-content user-message">You: {msg["content"]}</div>
+                    <div class="message-content user-message">{msg["content"]}</div>
                 </div>''',
                 unsafe_allow_html=True,
             )
         else:
             st.markdown(
-                f'''<div class="chat-container">
+                f'''<div class="chat-container bgcolor-assist">
                     <div class="emoji bot-emoji">🦄</div>
-                    <div class="message-content assistant-message">Assistant: {msg["content"]}</div>
+                    <div class="message-content assistant-message">{msg["content"]}</div>
                 </div>''',
                 unsafe_allow_html=True,
             )
