@@ -40,22 +40,6 @@ def handle_user_input(user_input, session_state):
         assistant_response = chat_response.choices[0].message.content
         session_state.messages.append({"role": "assistant", "content": assistant_response})
 
-def generate_pdf(session_state):
-    """Generate PDF from chat logs."""
-    if session_state.messages:
-        pdf = FPDF()
-        pdf.set_auto_page_break(auto=True, margin=15)
-        pdf.add_page()
-        pdf.set_font("Arial", size=12)
-
-        for msg in session_state.messages:
-            role = "You" if msg["role"] == "user" else "Assistant"
-            pdf.multi_cell(0, 10, f"{role}: {msg['content']}")
-
-        pdf_filename = "docs/chat_log.pdf"
-        pdf.output(pdf_filename)
-        return pdf_filename
-    return None
 
 def clear_chat_logs(session_state):
     """Clear chat logs and reset to initial state."""
